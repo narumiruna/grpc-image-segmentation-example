@@ -57,7 +57,7 @@ class SegmentationServicer(segmentation_pb2_grpc.SegmentationServicer):
 
 
 @click.command()
-@click.option('--host', default='127.0.0.1')
+@click.option('--host', default='[::]')
 @click.option('--port', default='50051')
 @click.option('--max-workers', default=1)
 def main(host, port, max_workers):
