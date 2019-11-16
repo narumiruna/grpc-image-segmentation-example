@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+service Segmentation {
+  rpc Predict(Request) returns (Response) {}
+}
+
+message Request { bytes image = 1; }
+
+message Response { bytes prediction = 1; }
