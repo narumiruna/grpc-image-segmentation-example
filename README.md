@@ -1,4 +1,4 @@
-# grpc-python-example
+# gRPC Image Segmentation Example
 
 ## Start server
 
