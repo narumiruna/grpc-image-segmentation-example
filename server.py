@@ -19,14 +19,14 @@ class SegmentationServicer(segmentation_pb2_grpc.SegmentationServicer):
     def Predict(self, request, context):
         bytes_data = request.image
         img = load_bytes_image(bytes_data)
-        out = self.segmentator(img).argmax(axis=0)
+        out = self.segmentator(img)
         return segmentation_pb2.Response(prediction=out.tobytes())
 
 
 @click.command()
 @click.option('--host', default='127.0.0.1')
 @click.option('--port', default='50051')
-@click.option('--max-workers', default=8)
+@click.option('--max-workers', default=1)
 def main(host, port, max_workers):
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=max_workers))
     servicer = SegmentationServicer()

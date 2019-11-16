@@ -20,7 +20,7 @@ def draw_mask(pred, num_classes=21, seed=1):
     h, w = pred.shape
 
     mask = np.zeros(shape=(h, w, 3), dtype=np.uint8)
-    for i in range(num_classes):
+    for i in range(1, num_classes):
         color = np.random.randint(0, 256, size=3, dtype=np.uint8)
         mask[pred == i, :] = color[None, :]
 
