@@ -3,6 +3,14 @@ from torchvision import transforms
 from torchvision.models.segmentation import deeplabv3_resnet101
 
 
+class ResizeCenterCrop(transforms.Compose):
+    def __init__(self, size):
+        super(ResizeCenterCrop, self).__init__([
+            transforms.Resize(size),
+            transforms.CenterCrop(size),
+        ])
+
+
 class Segmentator(object):
     def __init__(self, use_cuda=True):
         self.device = torch.device(
@@ -11,7 +19,7 @@ class Segmentator(object):
         self.model.to(self.device)
 
         self.transform = transforms.Compose([
-            transforms.CenterCrop(size=480),
+            ResizeCenterCrop(480),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225]),

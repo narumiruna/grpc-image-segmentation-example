@@ -1,10 +1,14 @@
 import click
 import grpc
 import numpy as np
+from PIL import Image
 
 import segmentation_pb2
 import segmentation_pb2_grpc
+from segmentator import ResizeCenterCrop
 from utils import load_bytes
+
+INPUT_SIZE = (480, 480)
 
 
 @click.command()
@@ -19,9 +23,14 @@ def main(host, port, image_path):
     stub = segmentation_pb2_grpc.SegmentationStub(channel)
     response = stub.Predict(segmentation_pb2.Request(image=bytes_data))
 
-    pred = np.frombuffer(response.prediction, dtype=np.int64).reshape(
-        (480, 480))
+    pred = np.frombuffer(response.prediction,
+                         dtype=np.int64).reshape(INPUT_SIZE)
     print(pred.shape)
+
+    img = Image.open(image_path).convert('RGB')
+    transform = ResizeCenterCrop(480)
+    img = transform(img)
+    img.show()
 
 
 if __name__ == '__main__':
