@@ -17,9 +17,10 @@ def main(host, port, image_path):
 
     bytes_data = load_bytes(image_path)
     stub = segmentation_pb2_grpc.SegmentationStub(channel)
-    pred = stub.Predict(segmentation_pb2.Request(image=bytes_data))
+    response = stub.Predict(segmentation_pb2.Request(image=bytes_data))
 
-    pred = np.frombuffer(pred.prediction, dtype=np.int64).reshape((480, 480))
+    pred = np.frombuffer(response.prediction, dtype=np.int64).reshape(
+        (480, 480))
     print(pred.shape)
 
 
