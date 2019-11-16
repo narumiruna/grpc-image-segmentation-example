@@ -5,7 +5,7 @@ from PIL import Image
 
 import segmentation_pb2
 import segmentation_pb2_grpc
-from segmentator import ResizeCenterCrop
+from server import ResizeCenterCrop
 from utils import draw_mask, load_bytes
 
 
