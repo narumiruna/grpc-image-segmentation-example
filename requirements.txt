@@ -1,0 +1,7 @@
+click
+grpcio
+grpcio-tools
+numpy
+pillow
+torch
+torchvision
