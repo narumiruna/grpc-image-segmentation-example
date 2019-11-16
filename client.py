@@ -10,10 +10,10 @@ from utils import draw_mask, load_bytes
 
 
 @click.command()
+@click.argument('image-path')
 @click.option('--host', default='127.0.0.1')
 @click.option('--port', default='50051')
-@click.option('--image-path')
-def main(host, port, image_path):
+def main(image_path, host, port):
     size = 480
     num_classes = 21
     max_message_length = num_classes * size * size * 4 + 5
