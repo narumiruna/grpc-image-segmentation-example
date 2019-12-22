@@ -32,11 +32,19 @@ def main(image_path, host, port):
     # draw result
     img = Image.open(image_path).convert('RGB')
     transform = ResizeCenterCrop(size)
+
     img = transform(img)
-
     mask = draw_mask(pred)
+    blend = Image.blend(img, mask, alpha=0.5)
 
-    Image.blend(img, mask, alpha=0.5).show()
+    width, height = img.size
+    new_img_size = (width, height * 3)
+    new_img = Image.new('RGB', new_img_size, (0, 0, 0))
+    new_img.paste(img, (0, 0))
+    new_img.paste(mask, (0, height))
+    new_img.paste(blend, (0, height * 2))
+
+    new_img.show()
 
 
 if __name__ == '__main__':

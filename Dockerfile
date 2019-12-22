@@ -8,6 +8,7 @@ RUN pip install \
     click \
     grpcio \
     pillow-simd \
+    protobuf \
     && rm -rf ~/.cache/pip
 
 RUN python -c "from torchvision.models.segmentation import deeplabv3_resnet101;deeplabv3_resnet101(pretrained=True)"
