@@ -1,11 +1,5 @@
 # gRPC Image Segmentation Example
 
-## Generate code
-
-```shell
-$ python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. segmentation.proto
-```
-
 ## Start server
 
 ```shell
@@ -21,4 +15,10 @@ $ docker run -d -p 50051:50051 grpcseg
 
 ```shell
 $ python client.py img.jpg
+```
+
+## Generate code
+
+```shell
+$ python -m grpc_tools.protoc --proto_path=. --python_out=. --grpc_python_out=. segmentation.proto
 ```
